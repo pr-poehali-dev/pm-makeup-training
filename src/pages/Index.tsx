@@ -8,6 +8,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const courses = [
     {
@@ -95,8 +96,29 @@ const Index = () => {
               <a href="#instructors" className="text-sm hover:text-primary transition-colors">Преподаватели</a>
               <a href="#contact" className="text-sm hover:text-primary transition-colors">Контакты</a>
             </div>
-            <Button className="bg-primary hover:bg-primary/90">Записаться</Button>
+            <div className="flex items-center gap-4">
+              <Button className="hidden md:flex bg-primary hover:bg-primary/90">Записаться</Button>
+              <button
+                className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={24} />
+              </button>
+            </div>
           </nav>
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 animate-fade-in">
+              <div className="flex flex-col gap-4">
+                <a href="#courses" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Курсы</a>
+                <a href="#portfolio" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Портфолио</a>
+                <a href="#testimonials" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Отзывы</a>
+                <a href="#instructors" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Преподаватели</a>
+                <a href="#contact" className="text-sm hover:text-primary transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Контакты</a>
+                <Button className="bg-primary hover:bg-primary/90 w-full" onClick={() => setIsMobileMenuOpen(false)}>Записаться</Button>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
